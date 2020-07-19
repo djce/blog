@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery</title>
+    <script src="{{ url_for('static',filename='js/jquery-3.5.1.js') }}"></script>
+</head>
+<body>
+    <div class="container"></div>
+
+    <div>
+        {% for user in users %}
+            <p>{{ user.user_name }}</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        $.get('http://httpbin.org/user-agent',function(data){
+            console.log(data)
+            var content;
+            $.each(data,function(i,items){
+                content="<p>"+items+"</p>";
+            })
+            
+            $(".container").append(content)
+        })
+
+    </script>
+
+</body>
+</html>
