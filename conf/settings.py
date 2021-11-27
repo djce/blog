@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 LOG_DIR = BASE_DIR / 'logs'
 
-if not LOG_DIR.exists(): LOG_DIR.os.makedirs(parents=True)
+if not LOG_DIR.exists(): LOG_DIR.mkdir(parents=True)
 
 # MySQL
 MYSQL_HOST = os.getenv('MYSQL_HOST')
@@ -29,10 +29,7 @@ class Config(object):
 
 class DevlopmentConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = f'mysql+pymysql:// \
-                        {MYSQL_USER}:{MYSQL_PASSWORD}@ \
-                        {MYSQL_HOST}:{MYSQL_PORT}/ \
-                        {MYSQL_DATABASE}?charset=utf8mb4'
+    SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}?charset=utf8mb4'
 
 class ProductionConfig(Config):
     pass

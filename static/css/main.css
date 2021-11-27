@@ -1,7 +1,7 @@
 body {
     background: #fafafa;
-    color: #333333;
-    margin-top: 5rem;
+    /* color: #333333; */
+    /* margin-top: 5rem; */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -11,9 +11,20 @@ body {
   .bg-steel {
     background-color: #5f788a;
   }
-  
+
+  .dropdown {
+    line-height: 45px;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
   .site-header .navbar-nav .nav-link {
+    height: 45px !important;
+    line-height: 45px;
     color: #cbd5db;
+    margin-right: 24px;
   }
   
   .site-header .navbar-nav .nav-link:hover {
@@ -21,7 +32,7 @@ body {
   }
   
   .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
+    font-weight: 200;
   }
   
   .content-section {
