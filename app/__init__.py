@@ -4,6 +4,7 @@ from conf import load_config
 from .models import *
 from .extensions import db, login_manager
 from .commands import init_cmd
+from .utils import JSONEncoder
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,7 +14,11 @@ def create_app():
                 template_folder=(BASE_DIR / 'templates'),
                 static_folder=(BASE_DIR / 'static'))
 
-    app.config.from_object(load_config())\
+    app.json_encoder = JSONEncoder
+
+    app.config.from_object(load_config())
+
+    
 
     # try:
     #     os.makedirs(app.instance_path)

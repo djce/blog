@@ -7,20 +7,20 @@ from wtforms.validators import ValidationError
 from ..models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Username',validators=[ DataRequired() ])
-    password = PasswordField('Password', validators=[ DataRequired() ])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+    username = StringField('用户名',validators=[ DataRequired() ])
+    password = PasswordField('密码', validators=[ DataRequired() ])
+    remember = BooleanField('记住密码')
+    submit = SubmitField('登录')
 
 class RegistForm(FlaskForm):
-    username = StringField('Username',
+    username = StringField('用户名',
                             validators=[ DataRequired(), Length(min=2, max=15) ])
-    email = StringField('Email',
+    email = StringField('邮箱',
                         validators=[ DataRequired(), Email() ])
-    password = PasswordField('Password', validators=[ DataRequired() ])
-    confirm_password = PasswordField('Confirm Password',
+    password = PasswordField('密码', validators=[ DataRequired() ])
+    confirm_password = PasswordField('确认密码',
                                     validators=[ DataRequired(), EqualTo('password') ])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('注册')
 
     def validate_username(self, attr):
         user = User.query.filter_by(username=attr.data).first()

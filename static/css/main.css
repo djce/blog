@@ -12,17 +12,7 @@ body {
     background-color: #5f788a;
   }
 
-  .dropdown {
-    line-height: 45px;
-  }
-
-  .navbar {
-    padding: 0;
-  }
-
   .site-header .navbar-nav .nav-link {
-    height: 45px !important;
-    line-height: 45px;
     color: #cbd5db;
     margin-right: 24px;
   }
