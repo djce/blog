@@ -4,7 +4,7 @@ from wtforms.fields.simple import BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from wtforms.validators import ValidationError
 
-from ..models import User
+from .models import User
 
 class LoginForm(FlaskForm):
     username = StringField('用户名',validators=[ DataRequired() ])

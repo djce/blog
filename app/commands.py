@@ -1,5 +1,5 @@
 from flask import Flask
-from .models import User
+from .auth.models import User
 import click
 
 def init_cmd(app: Flask, db):

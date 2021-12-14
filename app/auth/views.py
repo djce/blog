@@ -1,37 +1,27 @@
 from flask import Blueprint
 from flask import render_template
-from flask import flash
 from flask import jsonify, Response
 from flask import request,session
+from collections import OrderedDict
+from flask import redirect,url_for
+from flask_login import login_user,current_user, logout_user
+from sqlalchemy import or_,and_
+from datetime import datetime
+from .models import User
+from .forms import LoginForm, RegistForm
+from ..extensions import db
+from ..utils import JSONEncoder
+
 import json
 
-from app.utils import JSONEncoder
+auth_bp = Blueprint('user', __name__)
 
-from collections import OrderedDict
-
-
-from flask import redirect,url_for
-
-from flask_login import login_user,current_user, logout_user
-
-from sqlalchemy import or_,and_
-
-from datetime import datetime
-
-from ..models import User
-from ..forms.user import LoginForm, RegistForm
-
-from ..extensions import db
-
-user_bp = Blueprint('user', __name__)
-
-@user_bp.route('/home', methods=['GET'])
+@auth_bp.route('/home', methods=['GET'])
 def home():
     # flash('Hello world!','success')
     return render_template('index.html')
 
-
-@user_bp.route('/login', methods=['GET','POST'])
+@auth_bp.route('/login', methods=['GET','POST'])
 def login():
     form = LoginForm()
     if current_user.is_authenticated:
@@ -45,14 +35,14 @@ def login():
             db.session.commit()
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('user.home'))
-    return render_template('admin/login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
-@user_bp.route('/logout')
+@auth_bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('user.login'))
 
-@user_bp.route('/register', methods=['GET','POST'])
+@auth_bp.route('/register', methods=['GET','POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('user.home'))
@@ -67,9 +57,9 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('user.login'))
-    return render_template('admin/register.html', title='注册', form=form)
+    return render_template('auth/register.html', title='注册', form=form)
 
-@user_bp.route('/user')
+@auth_bp.route('/user')
 def get_users():
     users = User.query.all()
     data = [ OrderedDict(user.to_dict()) for user in users if user is not None]

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container pt-5">
+<div class="container pt-5 mt-5">
     <div class="row justify-content-center">
         <div class="col-md-4">
             <form action="" method="POST">
                 {{ form.hidden_tag() }}
-                <h4 class="text-center">博客</h4>
+                <h4 class="text-center">用户登录</h4>
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
                     {% if form.username.errors %}
