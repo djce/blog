@@ -5,7 +5,7 @@ import logging
 import sys
 from conf import load_config
 from .auth.models import User, Role
-from .posts import Post
+from .post import Post
 from .extensions import db, login_manager
 from .extensions import JSONEncoder
 from .commands import init_cmd
@@ -46,7 +46,7 @@ def register_extensions(app: Flask) -> None:
     db.app = app
 
     with app.app_context():
-        db.drop_all()
+        # db.drop_all()
         db.create_all()
 
     login_manager.init_app(app)

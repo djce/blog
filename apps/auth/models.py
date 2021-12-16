@@ -8,7 +8,7 @@ from ..extensions import db, login_manager
 def load_user(id):
     return User.query.get(id)
 
-user_roles = db.Table(
+db.Table(
     'tbl_auth_user_roles',
     db.Column('id', db.Integer, autoincrement=True, primary_key=True),
     db.Column('user_id', db.Integer, db.ForeignKey('tbl_auth_user.id')),
@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(200), default='avatar.png')
     last_login = db.Column(db.DateTime)
     is_active = db.Column(db.Boolean, default=True)
-    roles = db.relationship('Role', secondary='user_roles',
+    roles = db.relationship('Role', secondary='tbl_auth_user_roles',
                             backref=db.backref('users', lazy='dynamic'))
     posts = db.relationship('Post', backref='author', lazy=True)
     create_time = db.Column(db.DateTime, default=datetime.now)

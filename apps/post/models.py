@@ -2,7 +2,7 @@ from datetime import datetime
 from ..extensions import db
 
 class Post(db.Model):
-    __tablename__ = 'tbl_post_detail'
+    __tablename__ = 'tbl_blog_post'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.Text, nullable=False)
@@ -14,28 +14,28 @@ class Post(db.Model):
         return f'<Post {self.title}>'
 
 class Category(db.Model):
-    __tablename__ = 'tbl_post_category'
+    __tablename__ = 'tbl_blog_category'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20), unique=True)
-    parent_id = db.Column(db.Integer, db.ForeignKey('tbl_post_category.id'))
+    parent_id = db.Column(db.Integer, db.ForeignKey('tbl_blog_category.id'))
 
     def __str__(self):
         return f'<Category {self.title}>'
 
 
 class Comment(db.Model):
-    __tablename__ = 'tbl_post_comment'
+    __tablename__ = 'tbl_blog_comment'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200))
-    post_id = db.Column(db.Integer, db.ForeignKey('tbl_post_detail.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('tbl_blog_post.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('tbl_auth_user.id'), nullable=False)
 
 class Reply(db.Model):
-    __tablename__ = 'tbl_post_reply'
+    __tablename__ = 'tbl_blog_reply'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200))
     type = db.Column(db.String(10))
-    comment_id = db.Column(db.Integer, db.ForeignKey('tbl_post_comment.id'), nullable=False)
-    reply_id = db.Column(db.Integer, db.ForeignKey('tbl_post_reply.id'), nullable=False)
-    target_id = db.Column(db.Integer, db.ForeignKey('tbl_post_reply.id'), nullable=False)
+    comment_id = db.Column(db.Integer, db.ForeignKey('tbl_blog_comment.id'), nullable=False)
+    reply_id = db.Column(db.Integer, db.ForeignKey('tbl_blog_reply.id'), nullable=False)
+    target_id = db.Column(db.Integer, db.ForeignKey('tbl_blog_reply.id'), nullable=False)
     origin_id = db.Column(db.Integer, db.ForeignKey('tbl_auth_user.id'), nullable=False)
