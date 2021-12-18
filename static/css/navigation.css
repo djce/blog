@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+
+#app {
+	font-size: 1rem;
+	position: absolute;
+	top: 10%;
+	left: 50px;
+	/*transform: translate(-50%, -50%);*/
+}
+
+.navbar {
+	padding: 10px 50px;
+	background-color: #0f0f1e;
+}
+
+.navbar ul {
+	display: flex;
+}
+
+.nav-item a {
+	font-size: 1rem;
+	margin:  0 10px;
+	padding: 2px 5px;
+	text-decoration: none;
+	color: #eee;
+	border-radius: 20px;
+}
+
+.navbar a:hover {
+	border-color: black;
+}
+
+.navbar a.active {
+	color: #ff5c38;
+}

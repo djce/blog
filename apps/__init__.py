@@ -36,7 +36,7 @@ def create_app():
 
     init_cmd(app, db)
 
-    app.add_url_rule('/','user.home')
+    app.add_url_rule('/','auth.home')
 
     return app
 

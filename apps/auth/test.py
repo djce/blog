@@ -10,7 +10,7 @@ config = configparser.ConfigParser()
 # [section]
 # option = value
 
-config.read(BASE_DIR / 'conf/my.ini',encoding='utf-8')
+config.read(BASE_DIR / 'conf/scheduler.ini',encoding='utf-8')
 
 # config.read_file()
 
@@ -22,14 +22,14 @@ config.read(BASE_DIR / 'conf/my.ini',encoding='utf-8')
 config.sections()
 
 # section是否存在
-config.has_section(section='base')
+config.has_section(section='section')
 
 # 获取指定section的options的keys
-keys = config.options(section='base')
+keys = config.options(section='section')
 
 
 # 获取属性
-scheduler = config.get('base', 'scheduler')
+scheduler = config.get('section', 'option1')
 
 
 
